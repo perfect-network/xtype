@@ -1,0 +1,84 @@
+{extend name="base" /}
+{block name="title"}<title>帮助</title>{/block}
+{block name="style"}
+<style type="text/css">
+    p {
+        text-indent: 2em;
+    }
+</style>
+{/block}
+{block name="container"}
+    <section class="ui-container">
+
+        <ul class="ui-list ui-list-text ui-border-tb" style="margin-top:10px;">
+            <li class="ui-border-t">
+                <h4 class="ui-nowrap">安卓用户</h4>
+                <div class="ui-txt-info"></div>
+            </li>
+        </ul>
+
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">1. 下载OpenVPN，您可以<a href="{:url('index/index/download')}">点击这里来下载</a>，当然您也可以下载我们的安卓客户端，请<a href="{$config.app_url}">点击这里来下载安卓客户端</a>。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">2. 在我们官网选择一个线路文件，在OpenVPN中打开。<a href="{:url('index/index/actingList')}">您可以点击这里来查看线路文件</a>。客户端用户直接在软件界面安装路线就可以了。</p>
+
+        <ul class="ui-list ui-list-text ui-border-tb" style="margin-top:10px;">
+            <li class="ui-border-t">
+                <h4 class="ui-nowrap">苹果用户</h4>
+                <div class="ui-txt-info"></div>
+            </li>
+        </ul>
+
+         <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">1. 不管是安卓用户还是苹果用户，首先您必须下载OpenVPN软件。由于系统限制，大陆苹果用户不能直接下载OpenVPN，这时需要您切换一下您的App Store 账户。 </p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">2. 首先将自己App Store账号注销，在 [设置 - iTunes Store 与 App Store] 点击自己的用户名，然后选择注销。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">3. 用官方给出的账号登录。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:5px; -webkit-user-select: text;">
+            账号: 1900159930@qq.com 
+        </p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:5px; -webkit-user-select: text;">
+            密码: AbAb123456
+        </p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">4. 然后在App Store搜索OpenVPN Connect安装，或者您直接可以<a href="{:url('index/index/download')}">点击这里转跳到APP页面</a>。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">5. 在我们官网选择一个线路文件，在OpenVPN中打开。<a href="{:url('index/index/actingList')}">您可以点击这里来查看线路文件</a>。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">6. 在OpenVPN软件中，点击绿色的 + 号，输入用户名（Username）和密码（Password）。点击最下面的滑块来连接。</p>
+
+        <ul class="ui-list ui-list-text ui-border-tb" style="margin-top:20px;">
+            <li class="ui-border-t" data-href="http://ip.cn">
+                <h4 class="ui-nowrap">查看是否成功</h4>
+                <div class="ui-txt-info">点击这里查询IP</div>
+            </li>
+        </ul>
+
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">打开百度搜索，然后搜索 IP 。如果显示的不是您们当地的运营商IP，而是显示：阿里云、腾讯云等，证明您已经连接成功！</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">1. 关闭您的网络。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">2. 等1分钟查询你的流量，可以使用短信或者运营商网站查询，并记住它。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">3. 听一首歌吧，一般要用是3-5M。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">4. 听完之后呢，再次关闭您的网络。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">5. 等1分钟查询你的流量，可以使用短信或者运营商网站查询，并与第2步的查询进行比较。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">6. 如果相差不大，一般就10-20KB，证明您可以使用本服务。</p>
+
+        <!-- 请自行修改这里 -->
+        <ul class="ui-list ui-list-text ui-border-tb" style="margin-top:20px;">
+            <li class="ui-border-t">
+                <h4 class="ui-nowrap">业务说明</h4>
+                <div class="ui-txt-info"></div>
+            </li>
+        </ul>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">我们的业务分为：限量、限时，他们互不冲突。当您使用量限线路时，只会扣取您的量限流量。当您使用时限路线时，要确保您是否超时，它不会扣取您的量限流量。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">量限：速度快，没有时间限制，直到您用完为止，但价格较高。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">时限：速度较慢，有时间限制，但是没有流量限制，您可在超时前随意使用多少流量，便宜。</p>
+
+        <ul class="ui-list ui-list-text ui-border-tb" style="margin-top:20px;">
+            <li class="ui-border-t">
+                <h4 class="ui-nowrap">注意事项</h4>
+                <div class="ui-txt-info"></div>
+            </li>
+        </ul>
+        
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">1. 关闭您的Wifi，开启您的移动流量数据，把所有正在运行的软件都关闭。运行过程中，移动数据不可关闭。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">2. 如果手机双卡双待，请切换到您用来上网的手机卡。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">3. 不支持手机开热点。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">4. 拨打电话时，手机网络会自行中断，通话完成之后软件会自动重新连接，可能有部分手机需要手动重新连接软件。
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">5. 部分手机自带一键清理功能，或者安装360，手机管家，手机助手等此类软件，请将流量库设置为白名单，可以避免部分掉线问题。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">6. 请不要随便恢复手机出厂设置，也不要随便清理手机数据，由此造成的损失自行承担。</p>
+        <p class="ui-txt-default ui-txt-sub" style="margin-top:10px;">7. 本软件在部分城市存在盲区包括个别手机品牌型号不能兼容导致不能使用，首次使用时一定要先做测试，确认不会消耗您手机流量套餐的流量后再继续使用。</p>
+{/block}
+{/extend}

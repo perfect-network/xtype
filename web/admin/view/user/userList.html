@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <link rel="stylesheet" href="/static/css/vip.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+
+        <style type="text/css">
+            .hhide {
+                top:-45px;
+            }
+            .ui-icon-checked-s {
+                color: #65d521;
+            }
+            .key,.order {
+                position: relative;
+            }
+            .ui-actionsheet-cnt .active {
+                position: absolute;
+                z-index: 100;
+                right: 10px;
+                top: 0px;
+            }
+        </style>
+
+    </head>
+
+    <script type="text/javascript">
+    // 环境变量
+        var faceUrl = "{:url('admin/user/getUserData')}"
+    </script>
+    
+    <body ontouchstart>
+
+        <header class="ui-header ui-header-positive ui-border-b">
+            <i class="ui-icon-return" style="float: left;" onclick="history.back()"></i>
+            <i class="ui-icon-more" id="action" style="float: right;"></i>
+            <h1>用户列表</h1>
+        </header>
+
+        <section class="ui-container" style="transition:all 0.3s;">
+            <div class="ui-searchbar-wrap">
+                <div class="ui-searchbar ui-border-radius">
+                    <i class="ui-icon-search"></i>
+                    <div class="ui-searchbar-text">搜索</div>
+                    <div class="ui-searchbar-input"><input id="searchText" value="" type="text" placeholder="搜索" autocapitalize="off"></div>
+                </div>
+                <button class="ui-searchbar-cancel">取消</button>
+            </div>
+
+            <!-- 默认 -->
+            <ul class="ui-list ui-list-link ui-border-b ui-list-active" id="main">
+            </ul>
+
+            <!-- 搜索结果 -->
+            <ul class="ui-list ui-list-link ui-border-b ui-list-active" id="search" style="display: none">
+            </ul>
+
+        </section>
+
+        <div class="ui-actionsheet">  
+            <div class="ui-actionsheet-cnt">
+                <h4>排序关键字</h4>
+                <button id="start_time" class="key">注册时间<i class="ui-icon-checked-s active"></i></button>
+                <button id="end_time" class="key">到期时间</button>
+                <button id="quota_bytes" class="key">总流量</button>
+                <button id="last_login_time" class="key">上次登录</button>
+                <button id="money" class="key">币</button>
+                <h4>排序方式</h4> 
+                <button id="0" class="order">升序</button>  
+                <button id="1" class="order">降序<i class="ui-icon-checked-s active"></i></button>
+                <button id="btnC">取消</button> 
+            </div>         
+        </div>
+
+    </body>
+
+    <script src="/static/js/list.js"></script>
+</html>

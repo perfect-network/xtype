@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <h1>注册</h1>
+        </header>
+        <section class="ui-container" style="margin-top:12.2%;">
+            <div class="ui-form ui-border-t">
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label for="#">用户名</label>
+                    <input id="u" type="text" value="" placeholder="QQ号、手机号">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label for="#">密码</label>
+                    <input id="p" type="password" value="" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label for="#">验证</label>
+                    <input id="a" type="password" value="" placeholder="请再次输入密码">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label for="#">推荐码</label>
+                    <input id="v" type="phone" value="5200" placeholder="默认不用修改">
+                </div>
+
+            </div>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary" id="reg">
+                    注册
+                </button>
+            </div>
+
+            <ul class="ui-list ui-list-text ui-list-link ui-border-tb ui-list-active" style="margin-top:20px;">
+                <li data-href="{:url('index/connect/login')}">
+                    <h4 class="ui-nowrap">已有账号?</h4>
+                    <div class="ui-txt-info">快速登录</div>
+                </li>
+            </ul>
+
+        </section>
+        <div class="ui-loading-block">
+            <div class="ui-loading-cnt">
+                <i class="ui-loading-bright"></i>
+                <p>正在验证...</p>
+            </div>
+        </div>
+    </body>
+    <script>
+        $('.ui-list li,.ui-tiled li').click(function(){
+            if($(this).data('href')){
+                location.href= $(this).data('href');
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $('#reg').click(function() {
+
+            if ($('#p').val() != $('#a').val()) {
+                e = $.tips({
+                    content:'两次密码不一致',
+                    stayTime:2000,
+                    type:"warn"
+                });
+                return;
+            }
+
+            $.ajax({
+                url: '{:url('index/connect/deal')}' ,
+                type: 'GET' ,
+                dataType: 'json' ,
+                data: { 'u': $('#u').val() , 'p' : $('#p').val() , 'v' : $('#v').val() , 'type' : 'reg' },
+                
+                beforeSend:function(){
+                    $('.ui-loading-block').addClass('show');
+                },
+                success:function(res) {
+                    if( res.code == 1){
+                        s = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"success"
+                        });
+                        s.on("tips:hide",function(){
+                            location.href= res.url;
+                        });
+                        $('.ui-btn-primary').attr('disabled','');
+                    } else {
+                         e = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"warn"
+                        });
+                    }
+
+                    $('.ui-loading-block').removeClass('show');
+                },
+                error:function(msg) {
+                    $('.ui-loading-block').removeClass('show');
+
+                    e = $.tips({
+                        content:'加载出错',
+                        stayTime:2000,
+                        type:"warn"
+                    });
+                },
+            })
+        });
+    </script>
+</html>

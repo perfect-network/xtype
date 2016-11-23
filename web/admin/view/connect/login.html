@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+
+        <style type="text/css">
+            .ui-footer {
+                bottom: 0;
+                height: 44px;
+            }
+        </style>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <h1>管理员登录</h1>
+        </header>
+        <section class="ui-container" style="margin-top:12.2%;">
+                <div class="ui-form ui-border-t">
+                    <div class="ui-form-item ui-form-item-show ui-border-b">
+                        <label for="#">管理员</label>
+                        <input id="u" type="text" value="" placeholder="轻击输入">
+                    </div>
+                    <div class="ui-form-item ui-form-item-show ui-border-b">
+                        <label for="#">密码</label>
+                        <input id="p" type="password" value="" placeholder="轻击输入">
+                    </div>
+                    <div class="ui-form-item ui-form-item-switch ui-border-b">
+                        <p>记住我</p>
+                        <label class="ui-switch">
+                            <input type="checkbox"  id="r" checked="">
+                        </label>
+                    </div>
+            </div>
+
+            <div class="ui-footer ui-footer-stable ui-border-t">
+                <button class="ui-btn-lg ui-btn-primary">
+                    登录
+                </button>
+            </div>
+
+        </section>
+        <div class="ui-loading-block">
+            <div class="ui-loading-cnt">
+                <i class="ui-loading-bright"></i>
+                <p>正在加载中...</p>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        $(function(){
+            document.onkeydown = function(e){ 
+                var ev = document.all ? window.event : e;
+                if(ev.keyCode==13) {
+                    $('.ui-btn-primary').click();
+
+                }
+            }
+        });
+    
+        $('.ui-btn-primary').click(function() {
+            $.ajax({
+                url: '{:url('admin/connect/deal')}' ,
+                type: 'GET' ,
+                dataType: 'json' ,
+                data: { 'u': $('#u').val() , 'p' : $('#p').val() , 'type' : 'login' , 'r': $('#r').val()},
+                
+                beforeSend:function(){
+                    $('.ui-loading-block').addClass('show');
+                },
+                success:function(res) {
+                    if( res.code == 1){
+                        $('.ui-btn-primary').attr('disabled','');
+                        location.href= res.url;
+                    } else {
+                         e = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"warn"
+                        });
+                    }
+
+                    $('.ui-loading-block').removeClass('show');
+                },
+                error:function(msg) {
+                    $('.ui-loading-block').removeClass('show');
+
+                    e = $.tips({
+                        content:'加载出错',
+                        stayTime:2000,
+                        type:"warn"
+                    });
+                },
+            })
+        });
+    </script>
+</html>

@@ -1,0 +1,31 @@
+{php}
+  $_request = \think\Request::instance();
+{/php}
+<footer class="ui-footer ui-footer-stable ui-border-t">
+    <ul class="ui-tiled">
+        <li data-href="{:url('/index/index/index')}" class="{$_request->action() == 'index' ? 'active' : ''}">
+        	<div class="footer-icon">
+                <i class="ui-icon-personal" style="line-height: 32px;"></i>
+            </div>
+            <div id="f_my">我的</div>
+        </li>
+        <li data-href="{:url('/index/index/help')}" class="{$_request->action() == 'help' ? 'active' : ''}">
+        	<div class="footer-icon">
+                <i class="ui-icon-info" style="line-height: 32px;"></i>
+            </div>
+            <div id="f_help">帮助</div>
+        </li>
+        <li data-href="{:url('index/index/recharge')}" class="{$_request->action() == 'recharge' ? 'active' : ''}">
+        	<div class="footer-icon">
+                <i class="ui-icon-cart" style="line-height: 32px;"></i>
+            </div>
+            <div id="f_recharge">充值</div>
+        </li>
+        <li data-href="{:url('index/index/actingList')}" class="{$_request->action() == 'actinglist' ? 'active' : ''}">
+        	<div class="footer-icon">
+                <i class="ui-icon-file" style="line-height: 32px;"></i>
+            </div>
+            <div id="f_line">线路</div>
+        </li>
+    </ul>
+</footer>

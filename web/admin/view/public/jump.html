@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <h1>{switch name="code"}
+                {case value="1"}操作成功{/case}
+                {case value="0"}操作失败{/case}
+                {default /}转跳
+                {/switch}</h1>
+        </header>
+
+        <section class="ui-notice">
+
+            <div class="ui-tips ui-tips-{switch name="code"}
+                {case value="1"}success{/case}
+                {case value="0"}warn{/case}
+                {default /}info
+                {/switch}">
+                <i></i><span>{$msg}</span>
+            </div>
+
+            <p>
+                页面自动 <a id="href" href="{$url}">跳转</a> 等待时间： <b id="wait">{$wait}</b>
+            </p>
+
+        </section>
+
+    </body>
+    <script type="text/javascript">
+        (function(){
+            var wait = document.getElementById('wait'),
+                href = document.getElementById('href').href;
+            var interval = setInterval(function(){
+                var time = --wait.innerHTML;
+                if(time <= 0) {
+                    location.href = href;
+                    clearInterval(interval);
+                };
+            }, 1000);
+        })();
+    </script>
+</html>

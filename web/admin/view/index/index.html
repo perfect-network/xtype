@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <h1>管理员</h1>
+        </header>
+        <section class="ui-container">
+            <ul class="ui-list ui-list-text ui-list-link ui-border-tb ui-list-active" style="margin-top:20px;">
+                <li class="ui-border-t" data-href="{:url('admin/user/user')}">
+                    <h4 class="ui-nowrap">用户</h4>
+                    <div class="ui-txt-info">{$userNum}/{$activeNum}</div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/user/online')}">
+                    <h4 class="ui-nowrap">在线用户</h4>
+                    <div class="ui-txt-info">{$onlineNum}</div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/user/sendEmail')}">
+                    <h4 class="ui-nowrap">发送邮件</h4>
+                    <div class="ui-txt-info">全部用户</div>
+                </li>
+            </ul>
+
+            <ul class="ui-list ui-list-text ui-border-tb ui-list-link ui-list-active" style="margin-top:20px;">
+                <li class="ui-border-t" data-href="{:url('admin/acting/index')}">
+                    <h4 class="ui-nowrap">线路列表</h4>
+                    <div class="ui-txt-info">{$configNum}</div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/acting/type')}">
+                    <h4 class="ui-nowrap">分类管理</h4>
+                    <div class="ui-txt-info"></div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/acting/add')}">
+                    <h4 class="ui-nowrap">添加线路</h4>
+                    <div class="ui-txt-info"></div>
+                </li>
+            </ul>
+
+            <ul class="ui-list ui-list-text ui-border-tb ui-list-link ui-list-active" style="margin-top:20px;">
+                <li class="ui-border-t" data-href="{:url('admin/server/index')}">
+                    <h4 class="ui-nowrap">服务器</h4>
+                    <div class="ui-txt-info">{$serverNum}</div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/server/add')}">
+                    <h4 class="ui-nowrap">添加服务器</h4>
+                    <div class="ui-txt-info"></div>
+                </li>
+            </ul>
+
+            <ul class="ui-list ui-list-text ui-border-tb ui-list-link ui-list-active" style="margin-top:20px;">
+                <li class="ui-border-t" data-href="{:url('admin/card/packageList')}">
+                    <h4 class="ui-nowrap">套餐列表</h4>
+                    <div class="ui-txt-info">{$packageNum}</div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/card/package')}">
+                    <h4 class="ui-nowrap">增加套餐</h4>
+                    <div class="ui-txt-info"></div>
+                </li>
+            </ul>
+
+            <ul class="ui-list ui-list-text ui-border-tb ui-list-link ui-list-active" style="margin-top:20px;">
+                <li class="ui-border-t" data-href="{:url('admin/card/manageCard')}">
+                    <h4 class="ui-nowrap">管理卡密</h4>
+                    <div class="ui-txt-info">{$cardNum}</div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/card/createCard')}">
+                    <h4 class="ui-nowrap">生成卡密</h4>
+                    <div class="ui-txt-info"></div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/card/log')}">
+                    <h4 class="ui-nowrap">充值记录</h4>
+                    <div class="ui-txt-info">{$activeCardNum}</div>
+                </li>
+            </ul>
+
+            <ul class="ui-list ui-list-text ui-border-tb ui-list-link ui-list-active" style="margin-top:20px;">
+                <li class="ui-border-t" data-href="{:url('admin/index/webConfig')}">
+                    <h4 class="ui-nowrap">网站配置</h4>
+                    <div class="ui-txt-info"></div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/index/appConfig')}">
+                    <h4 class="ui-nowrap">APP设置</h4>
+                    <div class="ui-txt-info"></div>
+                </li>
+            </ul>
+
+            <ul class="ui-list ui-list-text ui-border-tb ui-list-link ui-list-active" style="margin-top:20px;">
+                <li class="ui-border-t" data-href="{:url('admin/index/log')}">
+                    <h4 class="ui-nowrap">日志</h4>
+                    <div class="ui-txt-info">{:round($sumData/1073741824,2)}GB/{:round(($surplus/1073741824)*0.8,2)}</div>
+                </li>
+                <li class="ui-border-t" data-href="{:url('admin/user/pastList')}">
+                    <h4 class="ui-nowrap">签到</h4>
+                    <div class="ui-txt-info">{$allPast} / {$todayPast}</div>
+                </li>
+            </ul>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-danger">
+                    退出
+                </button>
+            </div>
+
+        </section>
+
+        <div class="ui-loading-block">
+            <div class="ui-loading-cnt">
+                <i class="ui-loading-bright"></i>
+                <p>正在加载中...</p>
+            </div>
+        </div>
+
+        <script>
+        $('.ui-list li,.ui-tiled li').click(function(){
+            if($(this).data('href')){
+                location.href= $(this).data('href');
+            }
+        });
+        </script>
+
+        <script type="text/javascript">
+        $('.ui-btn-danger').click(function() {
+            $.ajax({
+                url: '{:url('admin/connect/deal')}' ,
+                type: 'GET' ,
+                dataType: 'json' ,
+                data: {'type' : 'logout' },
+
+                beforeSend:function(){
+                    $('.ui-loading-block').addClass('show');
+                },
+                success:function(res) {
+                    if( res.code == 1){
+                        s = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"success"
+                        });
+                        s.on("tips:hide",function(){
+                            location.href= res.url;
+                        });
+                    } else {
+                         e = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"warn"
+                        });
+                    }
+
+                    $('.ui-loading-block').removeClass('show');
+                },
+                error:function(msg) {
+                    $('.ui-loading-block').removeClass('show');
+
+                    e = $.tips({
+                        content:'加载出错',
+                        stayTime:2000,
+                        type:"warn"
+                    });
+                },
+            })
+        });
+    </script>
+    </body>
+</html>

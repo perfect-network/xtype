@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>全国免流VPN服务</title>
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-stable ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i>
+            <h1>别人如何选择</h1>
+        </header>
+        <section class="ui-container">
+            <ul class="ui-list ui-list-link ui-border-tb ui-list-active" style="margin-top:20px;">
+            {foreach name="data" item="v" key="k"} 
+                <li data-href="{:url('index/connect/downloadActing',['id' => $v.acting_id],'ovpn')}">
+                    <div class="ui-list-info ui-border-t">
+                        <h4 class="ui-nowrap">{$v->area->title}网友</h4>
+                        <p class="ui-nowrap">{$v->acting->title}</p>
+                    </div>
+                </li>
+            {/foreach}
+            </ul>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn ui-btn-primary" onclick="location.href='{:url('index/index/areaOrther',['page' => $page-1])}'" style="float: left;">
+                    上一页
+                </button>
+                <button class="ui-btn ui-btn-primary" onclick="location.href='{:url('index/index/areaOrther',['page' => $page+1])}'" style="float: right;">
+                    下一页
+                </button>
+            </div>
+
+        </section>
+
+        <script>
+        $('.ui-list li,.ui-tiled li').click(function(){
+            if($(this).data('href')){
+                location.href= $(this).data('href');
+            }
+        });
+        </script>
+       
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>全国免流VPN服务 - 立即注册，送500M流量 - 异云</title>
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i>
+            <h1>套餐列表</h1>
+        </header>
+        <section class="ui-container">
+
+            <ul class="ui-list ui-list-text ui-list-link ui-border-tb ui-list-active" style="margin-top:20px;">
+                
+                {foreach $package as $v} 
+                    <li class="ui-border-t" data-href="{:url('admin/card/package',['id' => $v.id])}">
+                    <h4 class="ui-nowrap">{$v.name}</h4>
+                    <div class="ui-txt-info">{$v.price}元</div>
+                </li>
+                {/foreach}
+
+            </ul>
+
+        </section>
+    </body>
+    <script>
+        $('.ui-list li,.ui-tiled li').click(function(){
+            if($(this).data('href')){
+                location.href= $(this).data('href');
+            }
+        });
+    </script>
+</html>

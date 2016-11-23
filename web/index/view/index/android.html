@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>全国免流VPN服务</title>
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <link rel="stylesheet" href="/static/css/vip.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-stable ui-border-b">
+            <h1>下载APP</h1>
+        </header>
+
+        <section class="ui-notice">
+            <p><b id="wait">5</b>秒后将自动下载</p>
+            <div class="ui-notice-btn">
+                <button class="ui-btn-primary ui-btn-lg" id="href" value="/static/softwere/openvpn汉化版.apk">立即下载</button>
+            </div>
+        </section>
+
+    </body>
+    <script>
+        var is_down = false;
+        $('.ui-btn-lg').click(function(){
+            if($(this).attr('value')){
+                is_down = true;
+                location.href= $(this).attr('value');
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        (function(){
+            var wait = document.getElementById('wait'),
+                href = document.getElementById('href').value;
+            var interval = setInterval(function(){
+                if (is_down == true) {
+                    clearInterval(interval);
+                }
+                var time = --wait.innerHTML;
+                if(time <= 0) {
+                    location.href = href;
+                    clearInterval(interval);
+                };
+            }, 1000);
+        })();
+    </script>
+</html>

@@ -1,0 +1,47 @@
+{extend name="base" /}
+{block name="title"}<title>状态</title>{/block}
+{block name="container"}
+    {if condition="empty($log)"}
+    <section class="ui-notice">
+        <i></i>
+        <p>你当前没有在线</p>
+        <div class="ui-notice-btn">
+            <button class="ui-btn-lg" onclick="location.href='{:url('index/index/actingList')}'">去选择线路</button>
+        </div>
+    </section>
+    {else /}
+    <ul class="ui-list ui-list-text ui-border-tb" style="margin-top:20px;">
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">用户名</h4>
+            <div class="ui-txt-info">{$log.username}</div>
+        </li>
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">开始时间</h4>
+            <div class="ui-txt-info">{$log.start_time}</div>
+        </li>
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">持续到</h4>
+            <div class="ui-txt-info">{$log.end_time}</div>
+        </li>
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">下载</h4>
+            <div class="ui-txt-info">{:round($log.bytes_sent/1048576,2)}M</div>
+        </li>
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">上传</h4>
+            <div class="ui-txt-info">{:round($log.bytes_received/1048576,2)}M</div>
+        </li>
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">所用服务器</h4>
+            <div class="ui-txt-info">{$log.type}</div>
+        </li>
+    </ul>
+
+    <div class="ui-btn-wrap">
+        <button class="ui-btn-lg ui-btn-danger" disabled="">
+            强制下线
+        </button>
+    </div>
+    {/if}
+{/block}
+{/extend}

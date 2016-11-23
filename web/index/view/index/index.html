@@ -1,0 +1,180 @@
+{extend name="base" /}
+{block name="title"}<title>我的</title>{/block}
+{block name="style"}
+<style type="text/css">
+    .user-bg {
+        background: url(http://q.qlogo.cn/headimg_dl?dst_uin={$data.qq}&spec=100);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .ui-avatar-one {
+        background-image: url(/static/img/logo.png);
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="/static/css/vip.css">
+{/block}
+{block name="container"}
+    {if condition="!empty($config.announcement)"}
+    <div class="ui-tooltips ui-tooltips-warn">
+        <div class="ui-tooltips-cnt ui-border-b" style="padding-right: 10px;">
+            <marquee behavior="scroll">{$config.announcement}</marquee>
+        </div>
+    </div>
+    {/if}
+
+    <section class="ui-panel-simple user-bg" style="padding-top: 10px; padding-bottom: 10px;">
+        <ul class="ui-tiled"><li><div>
+                <div class="ui-avatar-one">
+                    <span style="background-image:url(http://q.qlogo.cn/headimg_dl?dst_uin={$data.qq}&spec=100)"></span>
+                </div>
+        </div></li></ul>
+        <ul class="ui-tiled"><li><div>
+            {if condition="$data.power == 1"}
+            <span class="ui-icon-sviplevel-s">
+                <span style="background-image: url(http://i.gtimg.cn/vipstyle/frozenui/1.0.0/img/level/svip_s.png);background-position: center;"></span>
+            </span>
+            {else /}
+            <span class="ui-icon-viplevel-s">
+                <span style="background-image: url(http://i.gtimg.cn/vipstyle/frozenui/1.0.0/img/level/off/svip_s.png);background-position: center;"></span>
+            </span>
+            {/if}
+        </div></li></ul>
+        <ul class="ui-tiled"><li><div>{$data.username}</div></li></ul>
+        <ul class="ui-tiled"><li><div class="ui-txt-tips">{$data.starttime_text}</div></li></ul>
+    </section>
+
+    <ul class="ui-list ui-list-text ui-list-link ui-border-tb ui-list-active" style="margin-top: 0px;">
+        <li class="ui-border-t" data-href="{:url('index/index/proxy')}">
+            <h4 class="ui-nowrap ui-txt-feeds">身份</h4>
+            <div class="ui-txt-info">
+                {$data.power_text}
+            </div>
+        </li>
+        <li class="ui-border-t" data-href="{:url('index/index/area')}">
+            <h4 class="ui-nowrap ui-txt-feeds">地区</h4>
+            <div class="ui-txt-info">{$data.area_id_text}</div>
+        </li>
+        <li class="ui-border-t" data-href="{:url('index/index/upPass')}">
+            <h4 class="ui-nowrap ui-txt-feeds">密码</h4>
+            <div class="ui-txt-info">修改密码</div>
+        </li>
+        <li class="ui-border-t" id="email" data-href="{:url('index/index/qq')}">
+            <h4 class="ui-nowrap ui-txt-feeds">QQ</h4>
+            <div class="ui-txt-info">{if condition="$data.qq == NULL"}点此来绑定{else /}{$data.qq}{/if}</div>
+        </li>
+        <li class="ui-border-t" id="email" data-href="{:url('index/index/email')}">
+            <h4 class="ui-nowrap ui-txt-feeds">邮箱</h4>
+            <div class="ui-txt-info">{if condition="$data.active == 0"}点此来激活{else /}{$data.email}{/if}</div>
+        </li>
+    </ul>
+    {if condition="$data.active == 0"}
+    <div class="ui-tips ui-tips-info">
+        <i></i><span>激活邮箱后，你才能连接VPN哦！</span>
+    </div>
+    {/if}
+
+    <ul class="ui-list ui-list-text ui-border-t" style="margin-top:20px;">
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">下载</h4>
+            <div class="ui-txt-info">{$data.bytes_sent_deal}</div>
+        </li>
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">上传</h4>
+            <div class="ui-txt-info">{$data.bytes_received_deal}</div>
+        </li>
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">量限剩余</h4>
+            <div class="ui-txt-info">{$data.surplus}</div>
+        </li>
+        <li class="ui-border-t">
+            <h4 class="ui-nowrap">时限剩余</h4>
+            <div class="ui-txt-info {switch name="$data.time_limit"}
+                {case value="0"}ui-txt-warning{/case}
+                {case value="1"}{/case}
+                {case value="-1"}ui-txt-muted{/case}
+                {default /}
+                {/switch}">{$data.endtime_text}</div>
+        </li>
+        <li class="ui-border-tb">
+            <h4 class="ui-nowrap">异币剩余</h4>
+            <div class="ui-txt-info">{$data.money}元</div>
+        </li>
+    </ul>
+    <ul class="ui-list ui-list-text ui-list-link ui-border-b ui-list-active">
+        <li data-href="{:url('index/index/past')}">
+            <h4 class="ui-nowrap ui-txt-feeds">签到</h4>
+            <div class="ui-txt-info"></div>
+        </li>
+    </ul>
+
+    <ul class="ui-list ui-list-text ui-border-tb ui-list-link ui-list-active" style="margin-top:20px;">
+        <li class="ui-border-t" data-href="{:url('index/index/about')}">
+            <h4 class="ui-nowrap ui-txt-feeds">群和客服</h4>
+            <div class="ui-txt-info">新用户加群</div>
+        </li>
+        <li class="ui-border-t" data-href="{$config.app_url}">
+            <h4 class="ui-nowrap ui-txt-feeds">安卓客户端</h4>
+            <div class="ui-txt-info">点此下载</div>
+        </li>
+    </ul>
+
+    <div class="ui-btn-wrap">
+        <button class="ui-btn-lg ui-btn-danger">
+            退出
+        </button>
+    </div>
+    <div class="ui-loading-block">
+        <div class="ui-loading-cnt">
+            <i class="ui-loading-bright"></i>
+            <p>退出中...</p>
+        </div>
+    </div>
+{/block}
+{block name="javascript"}
+<script type="text/javascript">
+    $('.ui-btn-danger').click(function() {
+        $.ajax({
+            url: '{:url('index/connect/deal')}' ,
+            type: 'GET' ,
+            dataType: 'json' ,
+            data: {'type' : 'logout' },
+
+            beforeSend:function(){
+                $('.ui-loading-block').addClass('show');
+            },
+            success:function(res) {
+                if( res.code == 1){
+                    s = $.tips({
+                        content:res.msg,
+                        stayTime:2000,
+                        type:"success"
+                    });
+                    s.on("tips:hide",function(){
+                        location.href= res.url;
+                    });
+                } else {
+                     e = $.tips({
+                        content:res.msg,
+                        stayTime:2000,
+                        type:"warn"
+                    });
+                }
+
+                $('.ui-loading-block').removeClass('show');
+            },
+            error:function(msg) {
+                $('.ui-loading-block').removeClass('show');
+
+                e = $.tips({
+                    content:'加载出错',
+                    stayTime:2000,
+                    type:"warn"
+                });
+            },
+        })
+    });
+</script>
+{/block}
+{/extend}

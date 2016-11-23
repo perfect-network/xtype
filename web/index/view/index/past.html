@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>全国免流VPN服务</title>
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <link rel="stylesheet" href="/static/css/vip.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+
+        <style type="text/css">
+            .ui-footer {
+                bottom: 0;
+                height: 44px;
+            }
+        </style>
+    </head>
+
+    <body ontouchstart>
+        <header class="ui-header ui-header-stable ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i>
+            <h1>签到</h1>
+        </header>
+
+        <section class="ui-container ui-center">
+                1. 每日可签到1次。<br /><br />
+                2. 每周最多签到5次。<br /><br />
+                3. 签到流量立即到账。<br /><br />
+                4. 签到流量随机。<br /><br />
+        </section>
+
+        <div class="ui-footer ui-footer-stable ui-border-t">
+            <button class="ui-btn-lg ui-btn-primary" {if condition="$enabled== 0"}disabled=""{/if}>
+                {$msg}
+            </button>
+        </div>
+
+        <div class="ui-loading-block">
+            <div class="ui-loading-cnt">
+                <i class="ui-loading-bright"></i>
+                <p>正在加载...</p>
+            </div>
+        </div>
+
+        <script>
+        $('.ui-list li,.ui-tiled li').click(function(){
+            if($(this).data('href')){
+                location.href= $(this).data('href');
+            }
+        });
+
+        $('.ui-btn-primary').click(function() {
+            $.ajax({
+                url: '{:url('index/index/pastTapped')}' ,
+                type: 'GET' ,
+                dataType: 'json' ,
+                data: { 'card':$('#card').val() },
+
+                beforeSend:function(){
+                    $('.ui-loading-block').addClass('show');
+                },
+                success:function(res) {
+                    if( res.code == 1){
+                        s = $.tips({
+                            content:res.msg,
+                            stayTime:1000,
+                            type:"success"
+                        });
+                        s.on("tips:hide",function(){
+                            location.href= res.url;
+                        });
+                    } else {
+                         e = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"warn"
+                        });
+                    }
+
+                    $('.ui-loading-block').removeClass('show');
+                },
+                error:function(msg) {
+                    $('.ui-loading-block').removeClass('show');
+
+                    e = $.tips({
+                        content:'服务器或网络错误',
+                        stayTime:2000,
+                        type:"warn"
+                    });
+                },
+            })
+        });
+        
+        </script>
+    </body>
+</html>

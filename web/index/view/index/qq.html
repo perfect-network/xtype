@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>全国免流VPN服务</title>
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+
+        <style type="text/css">
+            .ui-footer {
+                bottom: 0;
+                height: 44px;
+            }
+        </style>
+    </head>
+
+    <body ontouchstart>
+        <header class="ui-header ui-header-stable ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i>
+            <h1>绑定QQ号</h1>
+        </header>
+        <section class="ui-container" style="margin-top:12.2%;">
+            <div class="ui-form ui-border-t">
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label for="#">用户名</label>
+                    <input id="u" type="text" value="{$data.username}" readonly>
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label for="#">QQ</label>
+                    <input id="e" type="text" placeholder="未绑定" value="{$data.qq}" readonly>
+                </div>
+            </div>
+
+            <p style="margin-top:10px;margin-bottom:5px;margin-left:10px;" class="ui-txt-tips ui-txt-info">绑定QQ号后，你可以直接在QQ机器人那里购买流量及相关服务。如何绑定：请申请加入官方交流群，给机器人发送 <span class="ui-txt-warning">绑定+用户名+密码</span>，注意 + 号也要加上哦。</p>
+
+        </section>
+        <div class="ui-loading-block">
+            <div class="ui-loading-cnt">
+                <i class="ui-loading-bright"></i>
+                <p>操作中...</p>
+            </div>
+        </div>
+    </body>
+
+</html>

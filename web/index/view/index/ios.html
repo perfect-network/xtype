@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>全国免流VPN服务</title>
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <link rel="stylesheet" href="/static/css/vip.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-stable ui-border-b">
+            <h1>下载APP</h1>
+        </header>
+
+        <section class="ui-notice">
+            <p>由于限制，苹果用户需要切换到美国区才能下载此应用。</p>
+            <p style="margin-top:5px;">请使用以下账户登录App Store，然后点击下面按钮进行下载。</p>
+            <p style="margin-top:5px; -webkit-user-select: text;">账号: 1900159930@qq.com </p>
+            <p style="margin-top:5px; -webkit-user-select: text;">密码: AbAb123456</p>
+
+            <div class="ui-notice-btn">
+                <button class="ui-btn-primary ui-btn-lg" id="href" value="https://itunes.apple.com/us/app/User-connect/id590379981">转跳到App Store</button>
+            </div>
+        </section>
+
+    </body>
+    <script>
+        $('.ui-btn-lg').click(function(){
+            if($(this).attr('value')){
+                location.href= $(this).attr('value');
+            }
+        });
+    </script>
+</html>

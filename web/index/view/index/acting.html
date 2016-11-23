@@ -1,0 +1,45 @@
+{extend name="base" /}
+{block name="title"}<title>线路</title>{/block}
+{block name="container"}
+    <ul class="ui-list ui-list-text ui-list-link ui-border-tb ui-list-active" style="margin-bottom: 10px;margin-top: 10px;">
+        <li data-href="{:url('index/index/areaOrther')}">
+            <h4 class="ui-nowrap ui-txt-feeds">看看别人如何选择的</h4>
+            <div class="ui-txt-info"></div>
+        </li>
+    </ul>
+    <div class="ui-tab" id="tab1">
+        <ul class="ui-tab-nav ui-border-tb">
+        {foreach $data as $v1}
+            <li>{$v1.name}</li>
+        {/foreach}
+        </ul>
+        <ul class="ui-tab-content">
+            {foreach $data as $v1}
+            <li class="current" style="height: auto;">
+                <ul class="ui-list ui-list-link ui-border-b ui-list-active">
+                    {foreach $v1->acting()->order('title')->select() as $v2}
+                    <li data-href="{:url('index/connect/downloadActing',['id' => $v2.id],'ovpn')}">
+                        <div class="ui-list-info ui-border-t">
+                            <h4 class="ui-nowrap">{$v2.title}</h4>
+                            <p class="ui-nowrap">{$v2.area}</p>
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+{/block}
+{block name="javascript"}
+    <script class="demo-script">
+    (function (){
+        var tab = new fz.Scroll('#tab1', {
+            role: 'tab',
+            autoplay: false,
+            interval: 3000
+        });
+    })();
+    </script>      
+{/block}
+{/extend}

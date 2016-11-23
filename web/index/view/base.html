@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        {block name="title"}<title>异云流量</title>{/block}
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云">
+        <!-- 请保留 -->
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon" href="/favicon.ico">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png">
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+        <style type="text/css">
+        	.ui-footer li {
+        		color: #989898;
+        	}
+
+            .ui-footer .active {
+                color: #00a5e0;
+            }
+
+            .ui-footer .active i{
+                color: #00a5e0;
+            }
+
+            .ui-footer {
+                height: 50px;
+            }
+
+            .ui-footer .footer-icon{
+                height: 28px;
+            }
+
+            .ui-footer ~ .ui-container {
+                border-bottom: 50px solid transparent;
+            }
+
+            .ui-footer .ui-tiled {
+                height: 50px;
+                font-size: 12px;
+            }
+
+            .ui-header-stable, .ui-footer-stable {
+                background-color: rgba(250,250,250,0.95);
+            }
+        </style>
+        {block name="style"}{/block}
+    </head>
+    <body ontouchstart>
+	    {block name="header"}{/block}
+	    {include file="public/footer" /}
+	    <section class="ui-container">
+	    {block name="container"}
+
+	    {/block}
+	    </section>
+	    <script type="text/javascript">
+			$('.ui-list li,.ui-tiled li').click(function(){
+			    if($(this).data('href')){
+			        location.href= $(this).data('href');
+			    }
+			});
+		</script>
+	    {block name="javascript"}{/block}
+	</body>
+</html>

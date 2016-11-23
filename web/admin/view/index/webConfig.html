@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i>
+            <h1>配置网站</h1>
+        </header>
+        <section class="ui-container" style="margin-top:20px;">
+            <div class="ui-form ui-border-t">
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>注册送GB</label>
+                    <input id="free" type="text" value="{$config.free}" placeholder="轻击以输入">
+                </div>
+            </div>
+
+            <div class="ui-form ui-border-t" style="margin-top: 10px;">
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>邮件</label>
+                    <input id="email" type="text" value="{$config.email}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>QQ</label>
+                    <input id="qq" type="text" value="{$config.qq}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>QQ群</label>
+                    <input id="qun_number" type="text" value="{$config.qun_number}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>QQ群KEY</label>
+                    <input id="qun_key" type="text" value="{$config.qun_key}" placeholder="轻击以输入">
+                </div>
+            </div>
+
+            <div class="ui-form ui-border-t" style="margin-top: 10px;">
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>APP链接</label>
+                    <input id="app_url" type="text" value="{$config.app_url}" placeholder="轻击以输入">
+                </div>
+            </div>
+
+            <div class="ui-form ui-border-t" style="margin-top: 10px;">
+                <div class="ui-form-item ui-form-item-textarea ui-border-b">
+                    <label>网站公告</label>
+                    <textarea placeholder="轻击以输入" id="announcement">{$config.announcement}</textarea>
+                </div>
+
+                <div class="ui-form-item ui-form-item-textarea ui-border-b">
+                    <label>APP公告</label>
+                    <textarea placeholder="轻击以输入" id="app_note">{$config.app_note}</textarea>
+                </div>
+            </div>
+
+            <div class="ui-form ui-border-t" style="margin-top: 10px;">
+                <div class="ui-form-item ui-form-item-textarea ui-border-b">
+                    <label>购买须知</label>
+                    <textarea placeholder="轻击以输入" id="buy_note">{$config.buy_note}</textarea>
+                </div>
+            </div>
+
+            <div class="ui-form ui-border-t" style="margin-top: 10px;">
+                <div class="ui-form-item ui-border-b">
+                    <label>用户注册</label>
+                    <div class="ui-select">
+                        <select id="reg">
+                            <option {if condition="$config.reg == 1"}selected=""{/if} value="1">开放</option>
+                            <option {if condition="$config.reg == 0"}selected=""{/if} value="0">关闭</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="ui-form-item ui-border-b">
+                    <label>用户登录</label>
+                    <div class="ui-select">
+                        <select id="login">
+                            <option {if condition="$config.login == 1"}selected=""{/if} value="1">开放</option>
+                            <option {if condition="$config.login == 0"}selected=""{/if} value="0">关闭</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary">
+                    保存
+                </button>
+            </div>
+        </section>
+        <div class="ui-loading-block">
+            <div class="ui-loading-cnt">
+                <i class="ui-loading-bright"></i>
+                <p>正在保存...</p>
+            </div>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+
+        $('.ui-btn-primary').click(function() {
+            $.ajax({
+                url: '{:url('admin/index/webSetting')}' ,
+                type: 'GET' ,
+                dataType: 'json' ,
+                data: {'login': $('#login').val() ,'reg':$('#reg').val() ,'announcement':$('#announcement').val() ,'qq':$('#qq').val() ,'email':$('#email').val() ,'buy_note':$('#buy_note').val() ,'free':$('#free').val() ,'app_note':$('#app_note').val() , 'qun_number':$('#qun_number').val(),'qun_key' : $('#qun_key').val(),'app_url' : $('#app_url').val() },
+                
+                beforeSend:function(){
+                    $('.ui-loading-block').addClass('show');
+                },
+                success:function(res) {
+                    if( res.code == 1){
+                        s = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"success"
+                        });
+                    } else {
+                         e = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"warn"
+                        });
+                    }
+
+                    $('.ui-loading-block').removeClass('show');
+                },
+                error:function(msg) {
+                    $('.ui-loading-block').removeClass('show');
+
+                    e = $.tips({
+                        content:'加载出错',
+                        stayTime:2000,
+                        type:"warn"
+                    });
+                },
+            })
+        });
+    </script>
+</html>

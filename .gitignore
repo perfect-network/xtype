@@ -1,0 +1,5 @@
+.idea
+composer.lock
+*.log
+/api/database.php
+/index/database.php

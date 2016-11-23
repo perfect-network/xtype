@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <i class="ui-icon-return" onclick="location.href='{:url('admin/index/index')}'"></i>
+            <h1>线路</h1>
+        </header>
+        <section class="ui-container">
+            <ul class="ui-list ui-list-link ui-border-tb ui-list-active" style="margin-top:20px;">
+            {foreach name="data" item="v" key="k"} 
+                <li data-href="{:url('admin/acting/acting',['id' => $v.id])}">
+                    <div class="ui-list-info ui-border-t">
+                        <h4 class="ui-nowrap">{$v.id}. {$v.title}</h4>
+                        <p class="ui-nowrap">类型:{$v->category->name} 下载次数:{$v.down_time}</p>
+                    </div>
+                </li>
+            {/foreach}
+            </ul>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn ui-btn-primary" onclick="location.href='{:url('admin/acting/index',['page' => $page-1])}'" style="float: left;">
+                    上一页
+                </button>
+                <button class="ui-btn ui-btn-primary" onclick="location.href='{:url('admin/acting/index',['page' => $page+1])}'" style="float: right;">
+                    下一页
+                </button>
+            </div>
+
+        </section>
+
+        <script>
+        $('.ui-list li,.ui-tiled li').click(function(){
+            if($(this).data('href')){
+                location.href= $(this).data('href');
+            }
+        });
+        </script>
+       
+    </body>
+</html>

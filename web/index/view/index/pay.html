@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>全国免流VPN服务</title>
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <link rel="stylesheet" href="/static/css/vip.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-stable ui-border-b">
+            <h1>支付</h1>
+        </header>
+
+        <section class="ui-notice">
+
+            <div class="ui-tips ui-tips-success">
+                <i></i><span>恭喜您，充值成功！</span>
+            </div>
+
+            <p class="jump">
+                页面自动 <a id="href" href="{:url('index/index/index')}">跳转</a> 等待时间： <b id="wait">3</b>
+            </p>
+
+        </section>
+
+    </body>
+    <script type="text/javascript">
+        (function(){
+            var wait = document.getElementById('wait'),
+                href = document.getElementById('href').href;
+            var interval = setInterval(function(){
+                var time = --wait.innerHTML;
+                if(time <= 0) {
+                    location.href = href;
+                    clearInterval(interval);
+                };
+            }, 1000);
+        })();
+    </script>
+</html>

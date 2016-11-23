@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i>
+            <h1>套餐</h1>
+        </header>
+        <section class="ui-container" style="margin-top:20px;">
+            <div class="ui-form ui-border-t" id="setting">
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>套餐名</label>
+                    <input id="name" type="text" value="{$package.name}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>购买连接</label>
+                    <input id="url" type="text" value="{$package.url}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>流量</label>
+                    <input id="data" type="text" value="{$package.data}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>时间</label>
+                    <input id="date" type="text" value="{$package.date}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>币</label>
+                    <input id="money" type="text" value="{$package.money}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>价格</label>
+                    <input id="price" type="text" value="{$package.price}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>代理</label>
+                    <input id="vip" type="text" value="{$package.vip}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>排序</label>
+                    <input id="sort" type="text" value="{$package.sort}" placeholder="轻击以输入">
+                </div>
+
+                <div class="ui-form-item ui-border-b">
+                    <label>是否可用</label>
+                    <div class="ui-select">
+                        <select id="enabled">
+                            <option {if condition="$package.enabled == 0"}selected=""{/if} value="0">不可用</option>
+                            <option {if condition="$package.enabled == 1"}selected=""{/if} value="1">可用</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary" id="save">
+                    保存
+                </button>
+            </div>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-danger" onclick="$('.ui-dialog').addClass('show')">
+                    删除
+                </button>
+            </div>
+            <div class="ui-dialog">
+                <div class="ui-dialog-cnt">
+                    <header class="ui-dialog-hd ui-border-b">
+                        <h3>警告</h3>
+                    </header>
+                    <div class="ui-dialog-bd">
+                        <h4>确认删除</h4>
+                        <div>请问你确实要删除这个套餐吗？</div>
+                    </div>
+                    <div class="ui-dialog-ft">
+                        <button type="button" data-role="button" onclick="$('.ui-dialog').removeClass('show')">取消</button>
+                        <button id="del" type="button" data-role="button">确认</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="ui-loading-block">
+            <div class="ui-loading-cnt">
+                <i class="ui-loading-bright"></i>
+                <p>正在保存...</p>
+            </div>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+
+        $('#save').click(function() {
+            $.ajax({
+                url: '{:url('admin/card/packageSave',['id' => $package.id])}' ,
+                type: 'GET' ,
+                dataType: 'json' ,
+                data: {'name':$('#name').val() , 'url': $('#url').val() ,'data':$('#data').val() ,'enabled':$('#enabled').val() , 'price' : $('#price').val() ,'date':$('#date').val() ,'sort' : $('#sort').val(),'money' : $('#money').val(),'vip':$('#vip').val()},
+
+                beforeSend:function(){
+                    $('.ui-loading-block').addClass('show');
+                },
+                success:function(res) {
+                    if( res.code == 1){
+                        s = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"success"
+                        });
+                    } else {
+                         e = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"warn"
+                        });
+                    }
+
+                    $('.ui-loading-block').removeClass('show');
+                },
+                error:function(msg) {
+                    $('.ui-loading-block').removeClass('show');
+
+                    e = $.tips({
+                        content:'加载出错',
+                        stayTime:2000,
+                        type:"warn"
+                    });
+                },
+            })
+        });
+
+        $('#del').click(function() {
+            $('.ui-dialog').removeClass('show');
+            var url = "{:url('admin/card/del',['id' => $package.id])}";
+            location.href= url;
+        });
+    </script>
+</html>

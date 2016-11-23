@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i>
+            <h1>生成卡密</h1>
+        </header>
+        <section class="ui-container" style="margin-top:20px;">
+            <div class="ui-form ui-border-t" id="setting">
+
+                <div class="ui-form-item ui-border-b">
+                    <label>套餐</label>
+                    <div class="ui-select">
+                        <select id="package">
+                            {foreach $package as $v} 
+                                <option value="{$v.id}">{$v.name}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label>数量</label>
+                    <input id="num" type="text" placeholder="轻击以输入">
+                </div>
+
+            </div>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary">
+                    生成
+                </button>
+            </div>
+        </section>
+    
+    </body>
+
+    <script type="text/javascript">
+
+        $('.ui-btn-primary').click(function() {
+            var url = "{:url('admin/card/createCardWhere')}";
+
+            var param = "package=" + $('#package').val() + "&num=" + $('#num').val();
+
+            location.href= url + "?" + param;
+        });
+
+    </script>
+</html>

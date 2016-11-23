@@ -1,0 +1,208 @@
+{extend name="base" /}
+{block name="title"}<title>充值</title>{/block}
+{block name="style"}
+<style type="text/css">
+    .ui-table {
+        line-height: 40px;
+        text-align: center;
+        background-color: #fff;
+    }
+</style>
+{/block}
+{block name="container"}
+    <div class="ui-tooltips ui-tooltips-guide">
+        <div class="ui-tooltips-cnt ui-border-b">
+            <i></i>24小时自动发货，充值立即到账
+        </div>
+    </div>
+
+    <div class="ui-form ui-border-t" style="margin-top:20px;">
+        <div class="ui-form-item ui-form-item-show ui-border-b">
+            <label for="#">卡密</label>
+            <input id="card" type="text" value="" placeholder="粘贴购买的卡密">
+        </div>
+    </div>
+
+    <div class="ui-btn-wrap">
+        <button class="ui-btn-lg ui-btn-primary" id="rechargeByCode">
+            卡密充值
+        </button>
+    </div>
+    <div class="ui-tab" id="tab1">
+        <ul class="ui-tab-nav ui-border-tb" style="margin-top:10px;">
+            <li>普通客户</li>
+            <li>代理客户</li>
+        </ul>
+        <ul class="ui-tab-content">
+            <li class="current" style="height: auto;">
+                <table class="ui-table ui-border-b">
+                    <thead>
+                    <tr><th>套餐</th><th>价格</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                    {foreach $package as $v} 
+                    <tr><td>{$v.name}</td><td>{$v.price}元</td><td><button class="ui-btn ui-btn-progress buy" style="margin-top: 5px;" data-id="{$v.id}" data-url="{$v.url}" data-name="{$v.name}">购买</button></td></tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </li>
+            <li class="current" style="height: auto;">
+                <table class="ui-table ui-border-b">
+                    <thead>
+                    <tr><th>套餐</th><th>价格</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                    {foreach $package as $v} 
+                    <tr><td>{$v.name}</td><td>{$v.vip}元</td><td><button class="ui-btn ui-btn-progress buy" style="margin-top: 5px;" data-id="{$v.id}" data-url="{$v.url}" data-name="{$v.name}">购买</button></td></tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </li>
+        </ul>
+    </div>
+
+    <p style="margin-top:10px;margin-bottom:20px;margin-left:10px;" class="ui-txt-tips ui-txt-info">{$config.buy_note}</p>
+
+    <div class="ui-loading-block">
+        <div class="ui-loading-cnt">
+            <i class="ui-loading-bright"></i>
+            <p>正在验证...</p>
+        </div>
+    </div>
+
+    <div class="ui-dialog">
+        <div class="ui-dialog-cnt">
+            <header class="ui-dialog-hd ui-border-b">
+                <h3>购买<span id="name"></span></h3>
+                <i class="ui-dialog-close" data-role="button" id="close"></i>
+            </header>
+            <div class="ui-dialog-bd">
+                <div style="text-indent: 2em;">感谢您的购买，现在请选择一种购买方式。</div>
+            </div>
+            <div class="ui-dialog-ft">
+                <button type="button" data-role="button" id="buyUrl">购买卡密</button>
+                <button type="button" data-role="button" id="buyId">异币支付</button>
+            </div>
+        </div>
+    </div>
+
+{/block}
+
+{block name="javascript"}
+<script type="text/javascript">
+var url = null;
+var id = null;     
+ 
+$('#close').click(function(){
+    $('.ui-dialog').removeClass('show');
+});
+
+$('#rechargeByCode').click(function() {
+    $.ajax({
+        url: '{:url('index/index/verify')}' ,
+        type: 'GET' ,
+        dataType: 'json' ,
+        data: { 'card':$('#card').val() },
+
+        beforeSend:function(){
+            $('.ui-loading-block').addClass('show');
+        },
+        success:function(res) {
+            if( res.code == 1){
+                s = $.tips({
+                    content:res.msg,
+                    stayTime:1000,
+                    type:"success"
+                });
+                s.on("tips:hide",function(){
+                    location.href= res.url;
+                });
+            } else {
+                 e = $.tips({
+                    content:res.msg,
+                    stayTime:2000,
+                    type:"warn"
+                });
+            }
+
+            $('.ui-loading-block').removeClass('show');
+        },
+        error:function(msg) {
+            $('.ui-loading-block').removeClass('show');
+
+            e = $.tips({
+                content:'服务器或网络错误',
+                stayTime:2000,
+                type:"warn"
+            });
+        },
+    })
+});
+
+$('#buyId').click(function() {
+    $.ajax({
+        url: '{:url('index/index/rechargeById')}' ,
+        type: 'GET' ,
+        dataType: 'json' ,
+        data: { 'id':id },
+
+        beforeSend:function(){
+            $('.ui-dialog').removeClass('show');
+            $('.ui-loading-block').addClass('show');
+        },
+        success:function(res) {
+            if( res.code == 1){
+                s = $.tips({
+                    content:res.msg,
+                    stayTime:1000,
+                    type:"success"
+                });
+                s.on("tips:hide",function(){
+                    location.href= res.url;
+                });
+            } else {
+                 e = $.tips({
+                    content:res.msg,
+                    stayTime:2000,
+                    type:"warn"
+                });
+                $('.ui-dialog').addClass('show');
+            }
+
+            $('.ui-loading-block').removeClass('show');
+        },
+        error:function(msg) {
+            $('.ui-loading-block').removeClass('show');
+            $('.ui-dialog').addClass('show');
+            e = $.tips({
+                content:'服务器或网络错误',
+                stayTime:2000,
+                type:"warn"
+            });
+        },
+    })
+});
+
+$('#buyUrl').click(function(){
+    if (url == null ) return;
+    location.href = url;
+});
+
+$('.buy').click(function(){
+    url = $(this).data('url');
+    id = $(this).data('id');
+    $('#name').html($(this).data('name'));
+    $('.ui-dialog').addClass('show');
+});
+
+(function (){
+    var tab = new fz.Scroll('#tab1', {
+        role: 'tab',
+        autoplay: false,
+        interval: 3000
+    });
+})();
+
+</script>
+{/block}
+{/extend}

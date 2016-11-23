@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i>
+            <h1>用户信息</h1>
+        </header>
+        <section class="ui-container">
+
+            <ul class="ui-list ui-list-text ui-border-tb" style="margin-top:20px;">
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">用户名</h4>
+                    <div class="ui-txt-info">{$data.username}</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">身份</h4>
+                    <div class="ui-txt-info">普通用户</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">注册日期</h4>
+                    <div class="ui-txt-info">{$data.start_time_text}</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">上次登录</h4>
+                    <div class="ui-txt-info">{$data.last_login_time_text}</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">地区</h4>
+                    <div class="ui-txt-info">{$data.area_id_text}</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">线路</h4>
+                    <div class="ui-txt-info">{$data.acting_id_text}</div>
+                </li>
+            </ul>
+            <ul class="ui-list ui-list-text ui-list-link ui-list-active ui-border-b" style="margin-top: 0px;">
+                <li class="ui-border-t" data-href="{:url('admin/user/status',['username' => $data.username ])}">
+                    <h4 class="ui-nowrap ui-txt-feeds">状态</h4>
+                    <div class="ui-txt-info">{$status}</div>
+                </li>
+            </ul>
+            <ul class="ui-list ui-list-text ui-border-b">
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">QQ</h4>
+                    <div class="ui-txt-info">{$data.qq}</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">邮箱</h4>
+                    <div class="ui-txt-info">{$data.email}</div>
+                </li>
+            </ul>
+            {if condition="$data.active == 0"}
+            <div class="ui-tips ui-tips-info">
+                <i></i><span>此用户未激活</span>
+            </div>
+            {/if}
+
+            <ul class="ui-list ui-list-text ui-border-tb" style="margin-top:20px;">
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">下载</h4>
+                    <div class="ui-txt-info">{$data.bytes_sent_deal}</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">上传</h4>
+                    <div class="ui-txt-info">{$data.bytes_received_deal}</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">剩余量限</h4>
+                    <div class="ui-txt-info">{$data.surplus}</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">剩余时限</h4>
+                    <div class="ui-txt-info">{$data.end_time_text}</div>
+                </li>
+                <li class="ui-border-t">
+                    <h4 class="ui-nowrap">剩余异币</h4>
+                    <div class="ui-txt-info">{$data.money}元</div>
+                </li>
+            </ul>
+
+            <div class="ui-form-item ui-border-b">
+                <label>是否可用</label>
+                <div class="ui-select">
+                    <select id="enabled">
+                        <option {if condition="$data.enabled == 1"}selected=""{/if} value="1">可用</option>
+                        <option {if condition="$data.enabled == 0"}selected=""{/if} value="0">禁用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ui-form-item ui-border-b">
+                <label>是否代理</label>
+                <div class="ui-select">
+                    <select id="power">
+                        <option {if condition="$data.power == 1"}selected=""{/if} value="1">代理</option>
+                        <option {if condition="$data.power == 0"}selected=""{/if} value="0">非代理</option>
+                    </select>
+                </div>
+            </div>
+
+            <ul class="ui-list ui-list-link ui-border-tb ui-list-active" style="margin-top:20px;">
+                <li data-href="{:url('admin/user/sendEmailOne',['id' => $data.id])}">
+                    <div class="ui-list-info ui-border-t">
+                        <h4 class="ui-nowrap">发送邮件</h4>
+                        <p class="ui-nowrap"></p>
+                    </div>
+                </li>
+                <li data-href="{:url('admin/user/timeOperate',['id' => $data.id])}">
+                    <div class="ui-list-info ui-border-t">
+                        <h4 class="ui-nowrap">时限操作</h4>
+                        <p class="ui-nowrap"></p>
+                    </div>
+                </li>
+                <li data-href="{:url('admin/user/dataOperate',['id' => $data.id])}">
+                    <div class="ui-list-info ui-border-t">
+                        <h4 class="ui-nowrap">量限操作</h4>
+                        <p class="ui-nowrap"></p>
+                    </div>
+                </li>
+                <li data-href="{:url('admin/user/moneyOperate',['id' => $data.id])}">
+                    <div class="ui-list-info ui-border-t">
+                        <h4 class="ui-nowrap">异币操作</h4>
+                        <p class="ui-nowrap"></p>
+                    </div>
+                </li>
+            </ul>
+
+        </section>
+        <script type="text/javascript">
+        $('#enabled').change(function() {
+            $.ajax({
+                url: '{:url('admin/user/updateEnabled')}' ,
+                type: 'GET' ,
+                dataType: 'json' ,
+                data: { 'enabled': $('#enabled').val() , 'id':{$data.id} },
+    
+                success:function(res) {
+                    if( res.code == 1){
+                        s = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"success"
+                        });
+                    } else {
+                         e = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"warn"
+                        });
+                    }
+                },
+                error:function(msg) {
+                    e = $.tips({
+                        content:'加载出错',
+                        stayTime:2000,
+                        type:"warn"
+                    });
+                },
+            })
+        });
+
+        $('#power').change(function() {
+            $.ajax({
+                url: '{:url('admin/user/updatePower')}' ,
+                type: 'GET' ,
+                dataType: 'json' ,
+                data: { 'power': $('#power').val() , 'id':{$data.id} },
+    
+                success:function(res) {
+                    if( res.code == 1){
+                        s = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"success"
+                        });
+                    } else {
+                         e = $.tips({
+                            content:res.msg,
+                            stayTime:2000,
+                            type:"warn"
+                        });
+                    }
+                },
+                error:function(msg) {
+                    e = $.tips({
+                        content:'加载出错',
+                        stayTime:2000,
+                        type:"warn"
+                    });
+                },
+            })
+        });
+
+        $('.ui-list li,.ui-tiled li').click(function(){
+            if($(this).data('href')){
+                location.href= $(this).data('href');
+            }
+        });
+    </script>
+    </body>
+</html>

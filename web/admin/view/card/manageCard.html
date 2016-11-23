@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <title>异云流量</title>
+        <meta itemprop="name" content="异云" />
+        <meta name="description" itemprop="description"  content="异云(xtype.cn)，用一种特殊的方式上网！" />
+        <meta name="apple-mobile-web-app-title" content="异云管理">
+        <meta name="author" contect="xtype, 792598794@qq.com" />
+        <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png" />
+        <link rel="apple-touch-startup-image" href="/static/img/start.png" />
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <script src="/static/lib/zepto.min.js"></script>
+        <script src="/static/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i>
+            <h1>管理卡密</h1>
+        </header>
+        <section class="ui-container" style="margin-top:20px;">
+            <div class="ui-form ui-border-t" id="setting">
+
+                <div class="ui-form-item ui-border-b">
+                    <label>使用</label>
+                    <div class="ui-select">
+                        <select id="is_use">
+                            <option selected="" value="0">未使用</option>
+                            <option value="1">已使用</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="ui-form-item ui-border-b">
+                    <label>套餐</label>
+                    <div class="ui-select">
+                        <select id="package">
+                            {foreach $package as $v} 
+                                <option value="{$v.id}">{$v.name}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary" id="show">
+                    显示
+                </button>
+            </div>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-danger">
+                    删除
+                </button>
+            </div>
+        </section>
+    <div class="ui-dialog">
+        <div class="ui-dialog-cnt">
+            <header class="ui-dialog-hd ui-border-b">
+                <h3>警告</h3>
+            </header>
+            <div class="ui-dialog-bd">
+                <h4>确认删除</h4>
+                <div>请问你确实要删除这些卡密吗？</div>
+            </div>
+            <div class="ui-dialog-ft">
+                <button type="button" data-role="button" onclick="$('.ui-dialog').removeClass('show')">取消</button>
+                <button id="del" type="button" data-role="button">确认</button>
+            </div>
+        </div>        
+    </div>
+    
+    </body>
+
+    <script type="text/javascript">
+
+        $('#show').click(function() {
+            var url = "{:url('admin/card/showCardWhere')}";
+
+            var param = "is_use=" + $('#is_use').val() + "&package=" + $('#package').val();
+
+            location.href= url + "?" + param;
+        });
+
+        $('.ui-btn-danger').click(function() {
+            $('.ui-dialog').addClass('show');
+        });
+
+        $('#del').click(function() {
+            $('.ui-dialog').removeClass('show');
+            var url = "{:url('admin/card/delCardWhere')}";
+
+            var param = "is_use=" + $('#is_use').val() + "&package=" + $('#package').val();
+
+            location.href= url + "?" + param;
+        });
+
+    </script>
+</html>

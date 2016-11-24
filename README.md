@@ -13,7 +13,7 @@
 
 ## 使用 git 安装 异云流控
 ~~~
-git clone https://github.com/myxtype/mian.git
+git clone https://github.com/myxtype/xtype.git
 ~~~
 > 因为目前 异云流控 几乎每天都会更新，建议大家采用git方式安装。
 

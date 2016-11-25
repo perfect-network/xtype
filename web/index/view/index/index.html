@@ -85,11 +85,11 @@
             <div class="ui-txt-info">{$data.bytes_received_deal}</div>
         </li>
         <li class="ui-border-t">
-            <h4 class="ui-nowrap">量限剩余</h4>
+            <h4 class="ui-nowrap">量限</h4>
             <div class="ui-txt-info">{$data.surplus}</div>
         </li>
         <li class="ui-border-t">
-            <h4 class="ui-nowrap">时限剩余</h4>
+            <h4 class="ui-nowrap">时限</h4>
             <div class="ui-txt-info {switch name="$data.time_limit"}
                 {case value="0"}ui-txt-warning{/case}
                 {case value="1"}{/case}
@@ -98,7 +98,7 @@
                 {/switch}">{$data.endtime_text}</div>
         </li>
         <li class="ui-border-tb">
-            <h4 class="ui-nowrap">异币剩余</h4>
+            <h4 class="ui-nowrap">异币</h4>
             <div class="ui-txt-info">{$data.money}元</div>
         </li>
     </ul>

@@ -105,21 +105,18 @@ class Robot extends Controller
         }
 
         $power = $user->power == 0 ? '客户' : 'VIP代理';
-        $online = Log::get(['username' => $user->username , 'status' => 1]);
-        $status = empty($online) ? '离线' : $online->type;
 
-        $data = $user->append(['bytes_received_deal','bytes_sent_deal','surplus','time_limit','starttime_text','end_time_text','area_id_text','power_text']);
+        $data = $user->append(['surplus','starttime_text','area_id_text']);
     
         $msg = "尊敬的" . $power . $data['username'] . "！";
         $msg .= "\n---------------";
         $msg .= "\n注册日期: " . $data['starttime_text'];
         $msg .= "\n地区: " . $data['area_id_text'];
-        $msg .= "\n状态: " . $status;
-        $msg .= "\n剩余量限: " . $data['surplus'];
-        $msg .= "\n剩余时限: " . $data['endtime_text'];
-        $msg .= "\n剩余异币: " . $data['money'] . '元';
+        $msg .= "\n量限: " . $data['surplus'];
+        $msg .= "\n时限: " . $data['endtime_text'];
+        $msg .= "\n异币: " . $data['money'] . '元';
         $msg .= "\n---------------";
-        $msg .= "\n您可以回复 [商品] 来进行异币或流量充值哦！";
+        $msg .= "\n您可以回复 [商品] 来进行流量充值哦！";
 
         return $msg;
     }

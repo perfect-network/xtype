@@ -11,7 +11,6 @@ class Common extends Controller
 
   	public function _initialize() {
       	$this->id = Session::get('admin_id');
-
       	if (empty($this->id)) {
             $passwd = Cookie::get('admin_passwd');
             $username = Cookie::get('admin_username');

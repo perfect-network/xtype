@@ -153,13 +153,13 @@ class Connect extends Controller
 	private function sendTapped() {
 		$user = User::get(Session::get('id'));
 
-        // if (empty($user)) {
-        //     return $this->error('需要登录');
-        // }
+        if (empty($user)) {
+            return $this->error('需要登录');
+        }
 
-        // if ($user->active == 1) {
-        // 	return $this->error('您已激活');
-        // }
+        if ($user->active == 1) {
+        	return $this->error('您已激活');
+        }
 
 		$validate = new \think\Validate([
 		    'e|邮箱'  => 'require|email',
@@ -195,7 +195,7 @@ class Connect extends Controller
         	]);
         $c = "尊敬的客户:<br />您好！我们非常高兴您能来激活账户！！<br />请点击下面链接来激活您的账户: <br /><a href=\"" . $url . "\">" . $url . "</a>";
 
-        if (!sendEmail($user->email,'云免用户，激活账户邮件',$c)) {
+        if (!sendEmail($user->email,'激活账户邮件',$c)) {
         	return $this->error('发送失败，请联系管理员');
         }
 

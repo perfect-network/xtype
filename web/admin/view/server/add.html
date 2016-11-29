@@ -47,9 +47,12 @@
                         <option value="1">时限</option>
                         <option value="0">量限</option>
                         <option value="2">免费</option>
+                        <option value="3">传统</option>
                     </select>
                 </div>
             </div>
+
+            <p style="margin-top:10px;margin-bottom:5px;margin-left:10px;" class="ui-txt-tips ui-txt-info">时限：只判断用户有没有过期。可以叠加。<br />量限：只判断用户流量是否小于零。可以叠加。<br />免费：只判断用户是否激活。<br />传统：要判断用户时间和流量，选择此选项必须在网站设置中打开传统模式。到期前3天可以叠加，到期后充值将会清零。<br /><span class="ui-txt-warning">传统模式和离散（时限、量限）只能选择其中一种。</span></p>
 
             <div class="ui-btn-wrap">
                 <button class="ui-btn-lg ui-btn-primary" id="add">

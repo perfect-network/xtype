@@ -229,14 +229,21 @@ return [
         'list_rows' => 15,
     ],
 
-    // 邮件设置
+    // +----------------------------------------------------------------------
+    // | 邮件服务器设置
+    // +----------------------------------------------------------------------
+    // 邮件服务器
     'mail_host'     =>  'smtp.yeah.net' ,
     'mail_smtpauth' =>  TRUE ,
+    // 邮件用户名
     'mail_username' =>  'xtype_admin@yeah.net' ,
+    // 邮件来源
     'mail_from'     =>  'xtype_admin@yeah.net' ,
+    // 来源方
     'mail_fromname' =>  '异云VPN服务' ,
+    // 邮件用户密码
     'mail_password' =>  'lZ126520' ,
+    // 邮件编码
     'mail_charset'  =>  'utf-8' ,
     'mail_ishtml'   =>  TRUE ,
-
 ];

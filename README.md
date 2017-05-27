@@ -93,6 +93,4 @@ www  WEB部署目录（或者子目录）
 
 All rights reserved。
 
-XType® 商标和著作权所有者为中国异科技有限公司。
-
 更多细节参阅 [LICENSE.txt](LICENSE.txt)
